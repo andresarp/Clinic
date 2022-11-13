@@ -1,0 +1,93 @@
+﻿@page "/Doctors/Register"
+@model RegisterModel
+@{
+    var image = "/images/images/profile_default.png";
+}
+
+<h1>Doctores</h1>
+
+<div class="container p-4">
+    <form method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <output id="imageUser">
+                            <img src="@image" class="imageUser" />
+
+                        </output>
+                    </div>
+                    <div class="card-body">
+                        <div class="caption text-center">
+                            <label class="btn btn-primary" for="files">Cargar foto</label>
+                            <input class="input-file" asp-for="Input.AvatarImage" accept="image/*" type="file" id="files" />
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-xs-6 col-md-5">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Registrar doctor</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="accordion" id="accordionPerfil">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <div class="bg-info" id="header">
+                                        <h2 class="mb-0-t text-light text-center">
+                                            Ingresar información
+                                        </h2>
+
+                                    </div>
+                                </div>
+                                <div class="collapse show" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionPerfil">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <input asp-for="Input.id" placeholder="Cédula" class="form-control" autofocus required />
+                                            <span asp-validation-for="Input.id" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input asp-for="Input.name" placeholder="Nombre" class="form-control" required />
+                                            <span asp-validation-for="Input.name" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input asp-for="Input.lastName" placeholder="Apellidos" class="form-control" required />
+                                            <span asp-validation-for="Input.lastName" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input asp-for="Input.phoneNumber" placeholder="Teléfono" class="form-control" required />
+                                            <span asp-validation-for="Input.phoneNumber" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.DropDownList("Input.specialty", new SelectList(Model.Input.SpecialtyList, "Text", "Text"), "Seleccione una especialidad", new {@class="form-control"})
+                                            <span asp-validation-for="Input.specialty" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group pt-4">
+                                            <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+                                        </div>
+
+                                        <div class="form-group pt-4">
+                                           <label class="text-danger">@Html.DisplayFor(m=> m.Input.ErrorMessage)</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+
+</div>
