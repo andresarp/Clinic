@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Clinica.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.InteropServices;
 
 namespace Clinica.Areas.Doctors.Pages.Account
 {
@@ -53,12 +54,12 @@ namespace Clinica.Areas.Doctors.Pages.Account
         public InputModel Input { get; set; }
         public class InputModel : InputModelRegister
         {
-            public IFormFile AvatarImage { get; set; }
+            public IFormFile? AvatarImage { get; set; }
 
             [TempData]
-            public string ErrorMessage { get; set; }
-
-            public List<SelectListItem> SpecialtyList { get; set; }
+            public string? ErrorMessage { get; set; }
+           
+            public List<SelectListItem>? SpecialtyList { get; set; }
         }
 
         public async Task<IActionResult> OnPost()
@@ -77,7 +78,7 @@ namespace Clinica.Areas.Doctors.Pages.Account
         {
             _dataInput = Input;
             var valor = false;
-            if (!Input.specialty.Equals("Seleccione una especialidad"))
+            if (ModelState.IsValid)
             {
                 var doctorList = _userManager.Users.Where(u=> u.Id.Equals(Input.idUser)).ToList();
                 if (doctorList.Count.Equals(0))
@@ -138,7 +139,13 @@ namespace Clinica.Areas.Doctors.Pages.Account
             }
             else
             {
-                _dataInput.ErrorMessage = "Seleccione una especialidad";
+                foreach (var modelState in ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        _dataInput.ErrorMessage += error.ErrorMessage;
+                    }
+                }
                 valor = false;
             }
 
