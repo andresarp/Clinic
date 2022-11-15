@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Clinica.Areas.Doctors.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Clinica.Data
@@ -9,5 +10,8 @@ namespace Clinica.Data
             : base(options)
         {
         }
+        public DbSet<TDoctors> TDoctors { get; set; }
+
+         
     }
 }
