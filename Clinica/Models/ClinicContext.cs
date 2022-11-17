@@ -18,7 +18,7 @@ namespace Clinica.Models
         }
 
         public virtual DbSet<Patient> Patients { get; set; } = null!;
-        public virtual DbSet<Specialty> Specialties { get; set; } = null!;
+        public virtual DbSet<SpecialtyRoom> Specialties { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -51,17 +51,19 @@ namespace Clinica.Models
                     .HasColumnName("phoneNumber");
             });
 
-            modelBuilder.Entity<Specialty>(entity =>
+            modelBuilder.Entity<SpecialtyRoom>(entity =>
             {
-                entity.HasKey(e => e.Number);
+                entity.HasKey(e => e.idSpecialtyRoom);
 
-                entity.ToTable("Specialty");
+                entity.ToTable("SpecialtyRoom");
 
-                entity.Property(e => e.Number).ValueGeneratedNever();
+                entity.Property(e => e.number).HasColumnName("number"); ;
 
-                entity.Property(e => e.Specialty1)
+                entity.Property(e => e.number).ValueGeneratedNever();
+
+                entity.Property(e => e.specialty)
                     .HasMaxLength(50)
-                    .HasColumnName("Specialty");
+                    .HasColumnName("specialty");
             });
 
             modelBuilder.Entity<Appointments>(entity =>
