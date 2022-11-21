@@ -12,22 +12,30 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.number)
+            Número del consultorio
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.number)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.specialty)
+           Nombre de la especialidad
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.specialty)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="idSpecialtyRoom" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <div class="row">
+            <div class="col-12 col-md-3 col-xl-2 order-md-2">
+                <div class="form-group">
+                    <input type="submit" value="Elimiar paciente" class="btn btn-danger btn-block" />
+                </div>
+            </div>
+            <div class="col-12 col-md-3 col-xl-2 d-flex align-items-center order-md-1">
+                <a asp-action="Index" class="btn btn-secondary btn-block">Regresar</a>
+            </div>
+        </div>
     </form>
 </div>

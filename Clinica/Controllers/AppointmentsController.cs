@@ -11,6 +11,7 @@ namespace Clinica.Controllers
 {
     public class AppointmentsController : Controller
     {
+
         private readonly ClinicContext _context;
 
         public AppointmentsController(ClinicContext context)
@@ -157,4 +158,5 @@ namespace Clinica.Controllers
           return _context.Appointments.Any(e => e.Id == id);
         }
     }
+
 }

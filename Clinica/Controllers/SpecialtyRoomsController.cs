@@ -13,6 +13,7 @@ namespace Clinica.Controllers
     {
         private readonly ClinicContext _context;
 
+
         public SpecialtyRoomsController(ClinicContext context)
         {
             _context = context;

@@ -8,6 +8,7 @@ namespace Clinica.Models
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "El campo fecha es obligatorio")]
+        [ValidateDate]
         public DateTime Date { get; set; }
         [Required(ErrorMessage = "El campo paciente es obligatorio")]
         public int IdPatient { get; set; }

@@ -11,9 +11,9 @@ namespace Clinica.Controllers
 
        // IServiceProvider _serviceProvider;
 
-        public HomeController(IServiceProvider serviceProvider)
+        public HomeController(ILogger<HomeController> logger)
         {
-            //_serviceProvider = serviceProvider;
+            _logger = logger;
         }
         /*
         public async Task<IActionResult> Index()
@@ -25,6 +25,7 @@ namespace Clinica.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogInformation("Home Controller Invoked"); 
             return View();
         }
 

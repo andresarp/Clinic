@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Clinica.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.InteropServices;
+using Clinica.Areas.Doctors.Controllers;
 
 namespace Clinica.Areas.Doctors.Pages.Account
 {
@@ -18,6 +19,7 @@ namespace Clinica.Areas.Doctors.Pages.Account
         private LSpecialtycs _specialty;
         private static InputModel _dataInput;
         private ApplicationDbContext _context;
+        private readonly ILogger<DoctorsController> _logger;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -124,6 +126,7 @@ namespace Clinica.Areas.Doctors.Pages.Account
                             }
                             catch (Exception ex)
                             {
+                                _logger.LogError("Excepción" + ex);
                                 _dataInput.ErrorMessage = ex.Message;
                                 transaction.Rollback();
                                 valor = false;

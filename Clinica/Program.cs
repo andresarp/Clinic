@@ -2,13 +2,29 @@ using Clinica.Data;
 using Clinica.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NLog;
+using NLog.Web;
 
-var builder = WebApplication.CreateBuilder(args);
+var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+logger.Debug("init main");
+
+try
+{
+    logger.Debug("Aplicación ha iniciado...");
+
+    var builder = WebApplication.CreateBuilder(args);
+
+// NLog: Setup NLog for Dependency injection
+builder.Logging.ClearProviders();
+builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+builder.Host.UseNLog();
 
 builder.Services.AddRazorPages();
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -20,6 +36,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ClinicContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 
 
@@ -56,3 +73,14 @@ app.MapRazorPages();
 
 
 app.Run();
+}
+catch (Exception ex)
+{
+    logger.Error(ex, "Excepción durante la ejecución");
+    throw;
+}
+
+finally
+{
+    NLog.LogManager.Shutdown();
+}
