@@ -30,9 +30,15 @@ body {
     z-index: -1;
 }
 
-.form-group{
-    padding-top:10px;
-    padding-bottom:10px;
+.display-4 {
+    display:none;
+}
+    .display-4 + p {
+        display: none;
+    }
+        .form-group {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .btn-block {
     width:100%;

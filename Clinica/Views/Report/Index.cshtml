@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Clinica.Models.Appointments>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="mb-3">Resumen de pacientes</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Cantidad de citas atendidas
+            </th>
+            <th>
+                Total de ingresos
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var count = 0;
+            decimal totalCost = 0;
+        }
+        @foreach (var item in Model)
+        {
+            count++;
+            totalCost += item.Cost;
+        }
+        <tr>
+            <td>
+                @count
+            </td>
+            <td>
+                @totalCost
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Porcentaje de especialidades atendidas
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            List<int> speciality = new List<int>();
+            decimal totalSpeciality = 6;
+        }
+        @foreach (var item in Model)
+        {
+            bool exist = false;
+            for (var i = 0; i < speciality.Count; i++)
+            {
+                if (speciality[i] == (item.Speciality))
+                {
+                    exist = true;
+                }
+            }
+            if (exist != true)
+            {
+                speciality.Add(item.Speciality);
+            }
+
+        }
+        @{
+            var @totalResult = Decimal.Round((@speciality.Count / @totalSpeciality) * 100);
+        }
+        <tr>
+            <td>
+                @totalResult%
+            </td>
+        </tr>
+
+    </tbody>
+</table>
