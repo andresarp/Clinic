@@ -87,11 +87,37 @@ namespace Clinica.Models
                 entity.Property(e => e.Speciality).HasColumnName("speciality");
             });
 
+            modelBuilder.Entity<Equipment>(entity =>
+            {
+                entity.HasKey(e => e.idEquipment);
+
+                entity.ToTable("Equipment");
+
+                entity.Property(e => e.name)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("name");
+
+                entity.Property(e => e.datePurchase)
+                    .HasColumnType("datetime")
+                    .HasColumnName("datePurchase");
+
+                entity.Property(e => e.assetNumber).HasColumnName("assetNumber");
+
+                entity.Property(e => e.serial).HasColumnName("serial");
+
+                entity.Property(e => e.description).HasColumnName("description");
+                entity.Property(e => e.specialty).HasColumnName("specialty");
+                entity.Property(e => e.consultingRoom).HasColumnName("consultingRoom");
+            });
+
             OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
         public DbSet<Clinica.Models.Appointments> Appointments { get; set; }
+
+        public DbSet<Clinica.Models.Equipment> Equipment { get; set; }
     }
 }
