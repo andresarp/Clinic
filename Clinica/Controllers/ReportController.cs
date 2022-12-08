@@ -157,4 +157,6 @@ namespace Clinica.Controllers
           return _context.Appointments.Any(e => e.Id == id);
         }
     }
+
+
 }
