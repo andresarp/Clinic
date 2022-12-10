@@ -4,34 +4,34 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="mb-3">Resumen de equipos</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<p class="mb-3">
+    <a asp-action="Create" class="btn btn-primary">Ingresar nuevo equipo</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.assetNumber)
+                Número de activo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.name)
+               Nombre
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.serial)
+                Serie
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.description)
+               Descripción
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.datePurchase)
+               Fecha de compra
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.specialty)
+               Especialidad asignada
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.consultingRoom)
+                Consultorio asignado
             </th>
             <th></th>
         </tr>
@@ -60,11 +60,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.consultingRoom)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.idEquipment">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.idEquipment">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.idEquipment">Delete</a>
-            </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.idEquipment" class="btn btn-secondary">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.idEquipment" class="btn btn-danger">Eliminar</a>
+                </td>
         </tr>
 }
     </tbody>
