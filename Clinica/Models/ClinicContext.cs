@@ -119,5 +119,7 @@ namespace Clinica.Models
         public DbSet<Clinica.Models.Appointments> Appointments { get; set; }
 
         public DbSet<Clinica.Models.Equipment> Equipment { get; set; }
+
+        public DbSet<Clinica.Models.Specialty> Specialty { get; set; }
     }
 }

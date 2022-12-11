@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Clinica.Models.Specialty>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="mb-3">Resumen de especialidades</h1>
+
+<p class="mb-3">
+    <a asp-action="Create" class="btn btn-primary">Crear especialidad</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Nombre de la especialidad
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nameSpecialty)
+            </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-secondary">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-danger">Eliminar</a>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

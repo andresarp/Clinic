@@ -1,0 +1,35 @@
+﻿@model Clinica.Models.Specialty
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<h1 class="mb-3">Eliminar paciente</h1>
+
+<h3 class="mb-3">¿Seguro que deseas eliminar la siguiente especialidad?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Nombre de la especialidad
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nameSpecialty)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="id" />
+        <div class="row">
+            <div class="col-12 col-md-3 col-xl-2 order-md-2">
+                <div class="form-group">
+                    <input type="submit" value="Eliminar especialidad" class="btn btn-danger btn-block" />
+                </div>
+            </div>
+            <div class="col-12 col-md-3 col-xl-2 d-flex align-items-center order-md-1">
+                <a asp-action="Index" class="btn btn-secondary btn-block">Regresar</a>
+            </div>
+        </div>
+    </form>
+</div>
