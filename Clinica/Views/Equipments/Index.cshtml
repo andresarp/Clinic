@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
 }
 
 <h1 class="mb-3">Resumen de equipos</h1>
@@ -39,13 +40,13 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            <td class="Número">
                 @Html.DisplayFor(modelItem => item.assetNumber)
             </td>
-            <td>
+            <td class="Nombre">
                 @Html.DisplayFor(modelItem => item.name)
             </td>
-            <td>
+            <td class="Serie">
                 @Html.DisplayFor(modelItem => item.serial)
             </td>
             <td>
@@ -54,10 +55,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.datePurchase)
             </td>
-            <td>
+            <td class="Especialidad">
                 @Html.DisplayFor(modelItem => item.specialty)
             </td>
-            <td>
+            <td class="Ubicación">
                 @Html.DisplayFor(modelItem => item.consultingRoom)
             </td>
                 <td>
@@ -68,3 +69,36 @@
 }
     </tbody>
 </table>
+
+<button id="reportExport">Exportar reporte</button>
+
+<script>
+    var jsonData = "";
+    const date = new Date().toISOString().slice(0, 10);
+    $(document).ready(function () {
+        $("#reportExport").on("click", function () {
+            jsonData += "{";
+            $("table tbody tr").each(function () {
+                $(this).find("td").each(function () {
+                    $this = $(this);
+                    if ($this.attr("class")) {
+                        jsonData += '"' + $this.attr("class") + '":"' + $this.html().trim() + '",'
+                    }    
+                });
+            });
+            jsonData += "}";
+            downloadJsonReport(jsonData.replaceAll(',}', '}'), "Reporte-activos-" + date + ".json");
+        });
+    });
+
+    const downloadJsonReport = (jsonData, fileName) => {
+        const downloadLink = document.createElement("a");
+        const file = new Blob([jsonData], { type: 'json/plain' });
+        const url = URL.createObjectURL(file);
+        downloadLink.href = url;
+        downloadLink.download = fileName;
+        downloadLink.click();
+        URL.revokeObjectURL(url);
+    }
+
+</script>
